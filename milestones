@@ -3,12 +3,25 @@ Milestones:
 - Text analysis program purpose:
     - Keyword extraction
 
+- Text analysis method:
+    - Scikit-learn, TensorFlow, or Keras can be used for these kinds of analyses.
+
+- Model training:
+    - 
+
+- Evaluate mode: 
+    - Using a test dataset to assess the performance of model. Measure metrics such as accuracy, precision, recall. 
+
+- Data collection method: 
+    - Twitch:
+        - Live streaming API to obtain text
+    - Youtube:
+
+
 - Text preprocessing program:
     - NLTK, SpaCy, or TextBlob.
 
-- Text analysis method:
-    - 
+- Process and store the data:
+    - After obtaining the live streaming chat data, we can store that in MongoDB.
 
-- Data collection method: 
-    - Twitch
-    - Youtube:
+- Application or service integration.

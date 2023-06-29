@@ -2,6 +2,8 @@ import tensorflow as tf
 from keras.preprocessing.text import Tokenizer
 from keras.utils import pad_sequences
 
+# Text-based artificial intelligence sample project
+
 # Sample dataset (positive and negative texts)
 texts = [
     "This movie was really great!",

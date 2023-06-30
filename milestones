@@ -1,7 +1,7 @@
 Milestones:
 
 - Text analysis program purpose:
-    - Keyword extraction
+    - Keyword extraction.
 
 - Text analysis method:
     - Scikit-learn, TensorFlow, or Keras can be used for these kinds of analyses.

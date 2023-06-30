@@ -1,6 +1,8 @@
 import torch
 from transformers import pipeline
 
+# Pytorch based Keyword extraction ai sample project 
+
 # Load the pre-trained model for keyword extraction
 model = pipeline("ner", model="dslim/bert-base-NER", tokenizer="dslim/bert-base-NER")
 

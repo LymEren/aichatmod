@@ -1,4 +1,3 @@
-import torch
 from transformers import pipeline
 
 # Pytorch based Keyword extraction ai sample project 

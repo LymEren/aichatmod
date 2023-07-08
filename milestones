@@ -6,7 +6,7 @@ Milestones:
 - Text analysis method:
     - Scikit-learn, TensorFlow, or Keras can be used for these kinds of analyses.
     Note:(I think it would be healthier to use Keras library.)
-
+    We can use Keras library
 - Model training:
     - 
 

@@ -1,52 +1,46 @@
-import tensorflow as tf
 from keras.preprocessing.text import Tokenizer
-from keras.utils import pad_sequences
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
 
-# Text-based artificial intelligence sample project
-# Sample dataset (positive and negative texts)
+# Data Preparation
 texts = [
-    "This movie was really great!",
-    "A magnificent performance was displayed.",
-    "This book was very boring.",
-    "I didn't like it at all, a waste of time.",
-    "I highly recommend this restaurant.",
-    "The quality of this product is very poor.",
-    "I had a wonderful experience.",
-    "It didn't meet my expectations, I was disappointed."
+    "This article contains basic information about deep learning.",
+    "Deep learning models are widely used in the field of artificial intelligence.",
+    "Artificial neural networks are a powerful tool that can be used for text analysis."
 ]
 
-labels = [1, 1, 0, 0, 1, 0, 1, 0]  # Positive (1) or negative (0) labels
+keywords = [
+    "deep learning",
+    "artificial intelligence",
+    "artificial neural networks",
+    "text analysis"
+]
 
-# Tokenizing text data
-tokenizer = Tokenizer(num_words=1000)
+tokenizer = Tokenizer()
 tokenizer.fit_on_texts(texts)
+X = tokenizer.texts_to_matrix(texts, mode='binary')
 
-# Converting text data to sequences and equalizing lengths
-text_sequences = tokenizer.texts_to_sequences(texts)
-text_sequences = pad_sequences(text_sequences, maxlen=10).tolist()
+# Model Creation
+model = Sequential()
+model.add(Dense(64, input_shape=(X.shape[1],), activation='relu'))
+model.add(Dense(len(keywords), activation='sigmoid'))
 
-# Model creation
-model = tf.keras.Sequential([
-    tf.keras.layers.Embedding(len(tokenizer.word_index) + 1, 16, input_length=10),
-    tf.keras.layers.GlobalAveragePooling1D(),
-    tf.keras.layers.Dense(24, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid')
-])
+# Compile the Model
+model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
 
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.summary()
+# Train the Model (requires training data and labels)
+# model.fit(X, y, epochs=10, batch_size=32)
 
-# Model training
-model.fit(text_sequences, labels, epochs=10, batch_size=2)
+# Making Predictions for New Texts
+new_texts = [
+    "Deep learning is a powerful technique for artificial intelligence.",
+    "Artificial neural networks are useful for text classification."
+]
 
-# Making a prediction for an example text
-example_text = ["The quality of this product is very poor."]
-example_text_sequences = tokenizer.texts_to_sequences(example_text)
-example_text_sequences = pad_sequences(example_text_sequences, maxlen=10)
+new_X = tokenizer.texts_to_matrix(new_texts, mode='binary')
+predictions = model.predict(new_X)
 
-prediction = model.predict(example_text_sequences)
-if prediction[0] > 0.5:
-    print("Positive text.")
-else:
-    print("Negative text.")
-
+for i, text in enumerate(new_texts):
+    print(f"Text: {text}")
+    print(f"Predicted Keywords: {', '.join([keywords[j] for j in range(len(keywords)) if predictions[i][j] > 0.5])}")
